@@ -38,6 +38,42 @@ sculptclean::Parameters activeParameters() {
     sculptclean::Parameters p; p.denoise=.6f;p.dereverb=.3f;p.click=.6f;p.hum=.5f;
     p.sourceEnabled=true;p.sourceThresholdDb=-27;p.sourceDepth=.3f;return p;
 }
+void checkImmediateLearnMeters() {
+    sculptclean::CleanEngine e;e.prepare(48000,128,2);
+    e.restoreLearnedState(profile());
+    require(e.getMeters().noiseProfileReady&&!e.getMeters().noiseLearning,
+            "restored profile flags are not visible before processing");
+
+    // The host can consume Learn in prepareToPlay while the transport is
+    // stopped, then publish meters without calling process() even once.
+    e.requestNoiseLearn();
+    require(!e.getLearnedState().noiseReady,"Learn did not invalidate the stored profile");
+    require(e.getMeters().noiseLearning,
+            "Learn intent is not visible in meters before the first audio block");
+    require(!e.getMeters().noiseProfileReady,
+            "meters still advertise the old profile after Learn");
+    require(e.getMeters().noiseLearnProgress==0,"new Learn did not publish zero progress");
+
+    auto noise=signal(2048);run(e,noise);
+    require(e.getMeters().noiseLearnProgress>0,"running Learn did not advance progress");
+    e.requestNoiseLearn();
+    require(e.getMeters().noiseLearning&&!e.getMeters().noiseProfileReady
+                &&e.getMeters().noiseLearnProgress==0,
+            "restarting Learn left stale progress or profile flags");
+
+    // Restore and invalidation must also be observable without a callback.
+    e.restoreLearnedState(profile());
+    require(e.getMeters().noiseProfileReady&&!e.getMeters().noiseLearning
+                &&e.getMeters().noiseLearnProgress==0,
+            "profile restore did not immediately stop the pending capture");
+    e.restoreLearnedState({});
+    require(!e.getMeters().noiseProfileReady&&!e.getMeters().noiseLearning,
+            "invalid profile restore left stale ready or learning flags");
+    e.requestNoiseLearn();
+    require(e.getMeters().noiseLearning&&!e.getMeters().noiseProfileReady,
+            "Learn without a previous profile is not immediately visible");
+    std::cout<<"PASS: immediate Learn/re-Learn and restored-profile meters without an audio callback\n";
+}
 void checkDelay() {
     const auto input=signal(16000);
     for(const double rate : {8000.0,44100.0,48000.0,96000.0,192000.0,384000.0})
@@ -132,6 +168,6 @@ void operator delete[](void* ptr) noexcept {std::free(ptr);}
 void operator delete(void* ptr,std::size_t) noexcept {std::free(ptr);}
 void operator delete[](void* ptr,std::size_t) noexcept {std::free(ptr);}
 int main() {
-    try {checkDelay();checkClick();checkHum();checkBlockAndResidue();checkBypassAndState();checkRealtime();std::cout<<"All engine integration checks passed.\n";return 0;}
+    try {checkImmediateLearnMeters();checkDelay();checkClick();checkHum();checkBlockAndResidue();checkBypassAndState();checkRealtime();std::cout<<"All engine integration checks passed.\n";return 0;}
     catch(const std::exception& e){countAllocations=false;std::cerr<<"FAIL: "<<e.what()<<'\n';return 1;}
 }

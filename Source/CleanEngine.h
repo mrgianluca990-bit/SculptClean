@@ -55,7 +55,12 @@ public:
         if (nowNeutral != neutral_) neutralRemaining_=neutralWaitSamples_;
         neutral_=nowNeutral;
     }
-    void requestNoiseLearn() { spectral_.requestNoiseLearn(); }
+    void requestNoiseLearn() {
+        spectral_.requestNoiseLearn();
+        // A stopped host can prepare and publish the state before processing
+        // its first block. Expose the new Learn state immediately.
+        updateMeters();
+    }
     int getLatencySamples() const noexcept { return latencySamples; }
     const Meters& getMeters() const noexcept { return meters_; }
     LearnedState getLearnedState() const { return spectral_.getLearnedState(); }
