@@ -26,9 +26,13 @@ option(SCULPT_BUILD_STUDIO "Build the offline Sculpt Clean Studio editor" ON)
 if(SCULPT_BUILD_STUDIO)
   include(cmake/RNNoise.cmake)
   include(cmake/Cathar.cmake)
+  # JUCE generates Icon.icns and its Info.plist entry from this master image.
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/Assets/SculptClean.png")
   juce_add_gui_app(SculptCleanStudio
     COMPANY_NAME "Sculpt"
     BUNDLE_ID "com.sculpt.clean.studio"
+    ICON_BIG "${CMAKE_CURRENT_SOURCE_DIR}/Assets/SculptClean.png"
     PRODUCT_NAME "Sculpt Clean Studio")
   target_sources(SculptCleanStudio PRIVATE
     Studio/Main.cpp Source/OfflineTools.h Source/OfflineRepair.h Source/VoiceDenoiser.h)

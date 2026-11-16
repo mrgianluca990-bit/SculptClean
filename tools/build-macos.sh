@@ -58,6 +58,19 @@ for sculpt_product in "$sculpt_bundle" "$sculpt_studio_bundle"; do
   plutil -lint "${sculpt_product}/Contents/Info.plist"
 done
 
+# Finder and Dock must have both the plist reference and the generated artwork.
+python3 - "$sculpt_studio_bundle" <<'PY'
+import pathlib, plistlib, sys
+contents = pathlib.Path(sys.argv[1]) / 'Contents'
+info = plistlib.loads((contents / 'Info.plist').read_bytes())
+if info.get('CFBundleIconFile') != 'Icon.icns':
+    raise SystemExit('Studio Info.plist does not reference Icon.icns')
+icon = contents / 'Resources' / 'Icon.icns'
+if not icon.is_file() or icon.stat().st_size == 0:
+    raise SystemExit('Studio icon file is missing or empty')
+print('Studio icon verified: Info.plist reference and nonempty Icon.icns')
+PY
+
 sculpt_notices="${sculpt_bundle}/Contents/Resources/ThirdParty"
 mkdir -p "$sculpt_notices"
 cp -R "${sculpt_root}/ThirdParty/." "$sculpt_notices/"
@@ -111,6 +124,8 @@ import sys, zipfile
 with zipfile.ZipFile(sys.argv[1]) as package:
     required = [
         'Sculpt-Clean/Sculpt Clean Studio.app/Contents/MacOS/Sculpt Clean Studio',
+        'Sculpt-Clean/Sculpt Clean Studio.app/Contents/Info.plist',
+        'Sculpt-Clean/Sculpt Clean Studio.app/Contents/Resources/Icon.icns',
         'Sculpt-Clean/Sculpt Clean Studio.app/Contents/Resources/cathar',
         'Sculpt-Clean/Sculpt Clean.vst3/Contents/MacOS/Sculpt Clean',
         'Sculpt-Clean/LEGGIMI.txt',
