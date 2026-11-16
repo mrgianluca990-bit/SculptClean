@@ -1,0 +1,43 @@
+SCULPT CLEAN — OFFLINE A-SPADE PORT
+
+Upstream project: https://github.com/andryr/spade-declipping
+Author: Andry Rafaralahy
+Copyright (c) 2023 Andry Rafaralahy
+License: MIT; the complete text is in LICENSE in this directory.
+Pinned commit: d9285bc5d6874670c462773f4c0dba55c6d7f66b
+
+Unmodified upstream reference files are included in this directory:
+tight_aspade.m, declip.m, hard_thresh.m, redundant_dft.m,
+redundant_idft.m and LICENSE. Their Git blob hashes are recorded in
+../PROVENANCE.json and were checked against the stored bytes.
+
+Source/OfflineRepair.h adapts the A-SPADE loop from tight_aspade.m,
+the hard coefficient threshold from hard_thresh.m, the windowed framing
+and normalization from declip.m, and the unitary FFT normalization from
+redundant_dft.m / redundant_idft.m.
+
+Changes in the Sculpt port (2026):
+- Native C++17 implementation, without MATLAB or the LTFAT runtime.
+- A unitary radix-2 DFT / inverse DFT is used as the tight frame;
+  this port does not use a redundant analysis dictionary.
+- Reusable operation-local buffers and a precomputed FFT table.
+- Original conservative near-rail/flat-plateau detection, with separate
+  positive and negative rail estimates per channel.
+- Adjustable iteration count, clipping threshold, amount and peak bound.
+- Conjugate-pair threshold consistency for real-valued synthesis.
+- Original free-region projection for manual sparse audio inpainting.
+- Context/selection validation, finite-value checks and progress reporting.
+- Transactional cancellation and commit: cancellation does not leave a
+  partially modified input file.
+- Unclipped samples remain byte-for-byte unchanged by the de-clip stage;
+  manual repair changes only the selected sample range.
+
+The implementation and tests do not establish equivalence with iZotope RX,
+nor do they reproduce the complete set of SPADE survey experiments.
+
+Algorithmic references:
+S. Kitic, N. Bertin and R. Gribonval, "Sparsity and cosparsity for audio
+declipping: a flexible non-convex approach," LVA/ICA, 2015.
+P. Zaviska, O. Mokry and P. Rajmic, "S-SPADE Done Right: Detailed Study
+of the Sparse Audio Declipper Algorithms," arXiv:1809.09847v4, 2020.
+https://arxiv.org/abs/1809.09847

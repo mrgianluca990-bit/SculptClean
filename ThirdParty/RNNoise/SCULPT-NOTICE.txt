@@ -1,0 +1,24 @@
+RNNoise compact — Sculpt Clean Studio offline integration
+
+Upstream: https://github.com/xiph/rnnoise
+Tag: v0.1
+Commit: cdf196b1e9de2f8ff1003328ebf9a4316477429d
+Archive: https://codeload.github.com/xiph/rnnoise/tar.gz/cdf196b1e9de2f8ff1003328ebf9a4316477429d
+Archive SHA-256: a6f3bd89c5c12546d049bcdcf6d1b58c301fd9c811e760f3087b036a93501d98
+Embedded trained model: src/rnn_data.c
+Model source SHA-256: f0cdb52b30501aab489f90fedbc7a023c719d91b337db2da7f26fc3036556b95
+
+The upstream files listed in upstream.json are vendored unchanged. COPYRIGHT,
+redistribution conditions and disclaimer are retained in COPYING and each
+upstream source file. This includes the compact trained weights distributed
+as source in the original repository; no synthetic or replacement model was
+generated for Sculpt Clean. No model download is required at build or runtime.
+
+Sculpt's C++ adapter and CMake integration are separate from upstream files.
+The adapter serializes and primes RNNoise's shared FFT initialization during
+prepare(), converts normalized float audio to RNNoise's PCM-scale floats, and
+aligns dry/wet paths with a 960-sample streaming delay at 48 kHz.
+
+This is the original compact v0.1 model, not the current v0.2 RNNoise model.
+It is trained for speech noise suppression and is not a music separator,
+multi-speaker separator, dereverberator or implementation of iZotope software.

@@ -1,0 +1,17 @@
+{
+  "name": "Cathar",
+  "version": "0.8.0",
+  "repository": "https://github.com/vbasky/cathar",
+  "commit": "f2c2842f89084589d069e5a8a0b61311aa70d928",
+  "archive_url": "https://codeload.github.com/vbasky/cathar/tar.gz/f2c2842f89084589d069e5a8a0b61311aa70d928",
+  "archive_sha256": "2c6cfa7e876d452d81b32ff8c1515363ec6437d4c72a235bc03af382fd014939",
+  "license": "MIT OR Apache-2.0",
+  "enabled_features": [],
+  "excluded_features": [
+    "ml",
+    "tui"
+  ],
+  "source_modified": false,
+  "rust_toolchain": "1.90.0",
+  "purpose": "Offline restoration helper; not called from the audio callback"
+}

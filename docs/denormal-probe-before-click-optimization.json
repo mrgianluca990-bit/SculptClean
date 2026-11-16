@@ -1,0 +1,18 @@
+[
+{"ftz_daz":false,"results":[
+    {"mode":"full","instances":1,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":531.7212,"median_us":491.3910,"p99_us":969.1460,"max_us":3571.5710,"over_budget_callbacks":0,"mean_budget_percent":4.9849,"process_cpu_percent_one_core":4.9959},
+    {"mode":"full","instances":16,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":7672.8417,"median_us":7202.2930,"p99_us":16411.4420,"max_us":18725.7620,"over_budget_callbacks":16,"mean_budget_percent":71.9329,"process_cpu_percent_one_core":71.8887}
+]},
+{"ftz_daz":true,"results":[
+    {"mode":"full","instances":1,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":510.5119,"median_us":489.1770,"p99_us":790.7320,"max_us":4192.0040,"over_budget_callbacks":0,"mean_budget_percent":4.7860,"process_cpu_percent_one_core":4.7958},
+    {"mode":"full","instances":16,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":7411.8199,"median_us":7107.6350,"p99_us":11174.0530,"max_us":41442.5660,"over_budget_callbacks":6,"mean_budget_percent":69.4858,"process_cpu_percent_one_core":69.5070}
+]},
+{"ftz_daz":true,"results":[
+    {"mode":"full","instances":1,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":617.4546,"median_us":475.7410,"p99_us":3542.2260,"max_us":5597.6360,"over_budget_callbacks":0,"mean_budget_percent":5.7886,"process_cpu_percent_one_core":5.8022},
+    {"mode":"full","instances":16,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":10949.2839,"median_us":7489.3110,"p99_us":70272.9860,"max_us":148366.3500,"over_budget_callbacks":68,"mean_budget_percent":102.6495,"process_cpu_percent_one_core":102.7027}
+]},
+{"ftz_daz":false,"results":[
+    {"mode":"full","instances":1,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":682.1325,"median_us":511.5080,"p99_us":2381.7320,"max_us":19425.7690,"over_budget_callbacks":2,"mean_budget_percent":6.3950,"process_cpu_percent_one_core":6.4092},
+    {"mode":"full","instances":16,"block_size":512,"callbacks":384,"budget_us":10666.6667,"mean_us":10350.7240,"median_us":8331.6290,"p99_us":56031.4490,"max_us":83866.9130,"over_budget_callbacks":77,"mean_budget_percent":97.0380,"process_cpu_percent_one_core":97.1206}
+]}
+]

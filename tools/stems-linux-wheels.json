@@ -1,0 +1,30 @@
+{
+  "torch": {
+    "cp310": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.2.2%2Bcpu-cp310-cp310-linux_x86_64.whl",
+      "sha256": "02c4fac3c964e73f5f49003e0060c697f73b67c10cc23f51c592facb29e1bd53"
+    },
+    "cp311": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.2.2%2Bcpu-cp311-cp311-linux_x86_64.whl",
+      "sha256": "90089cae572672fb449c8ff1dc1b29daaffa117bf97ede7463dcd2fd1b991e4c"
+    },
+    "cp312": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.2.2%2Bcpu-cp312-cp312-linux_x86_64.whl",
+      "sha256": "431a747b5a880cf8e1fb6d58db6bfafa6768cbec76517d046854537c03323edf"
+    }
+  },
+  "torchaudio": {
+    "cp310": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.2.2%2Bcpu-cp310-cp310-linux_x86_64.whl",
+      "sha256": "a072a93cfe357a890c7f73fc39665445f0dc58bbf79045b88113ee4dbf658c81"
+    },
+    "cp311": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.2.2%2Bcpu-cp311-cp311-linux_x86_64.whl",
+      "sha256": "144767aad7609ee7c0dfe9f163003db584aaab3bc69db388d56dad3772a267d4"
+    },
+    "cp312": {
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.2.2%2Bcpu-cp312-cp312-linux_x86_64.whl",
+      "sha256": "6adffc55d7a42e5dab86c23f1a2287529a073160e5cc241269e467561a7513ee"
+    }
+  }
+}

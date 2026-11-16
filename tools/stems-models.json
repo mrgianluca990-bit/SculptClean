@@ -1,0 +1,39 @@
+{
+  "model": "umxhq",
+  "record": "https://zenodo.org/records/3370489",
+  "license": "mit-license",
+  "files": [
+    {
+      "stem": "bass",
+      "filename": "bass-8d85a5bd.pth",
+      "url": "https://zenodo.org/api/records/3370489/files/bass-8d85a5bd.pth/content",
+      "bytes": 35637796,
+      "sha256": "8d85a5bd3f996a8867fca0e8442e077e5a3f5ec747a6112742452a8f347b39c8",
+      "upstream_md5": "8cc37d31903fe48306468ee968f4b1b6"
+    },
+    {
+      "stem": "drums",
+      "filename": "drums-9619578f.pth",
+      "url": "https://zenodo.org/api/records/3370489/files/drums-9619578f.pth/content",
+      "bytes": 35637796,
+      "sha256": "9619578f885c54737cb0234f9f9a4a679ee4f31438fd77fd1dbe02bb16c2da0a",
+      "upstream_md5": "cebf76e196e73e85d247f462c31e36fc"
+    },
+    {
+      "stem": "vocals",
+      "filename": "vocals-b62c91ce.pth",
+      "url": "https://zenodo.org/api/records/3370489/files/vocals-b62c91ce.pth/content",
+      "bytes": 35637796,
+      "sha256": "b62c91cedbc7a066f1778ead5b5cecb377aa3a46a31af1cce7c5c8769339d083",
+      "upstream_md5": "d918985fad0fedf6d9ce89e279aa7218"
+    },
+    {
+      "stem": "other",
+      "filename": "other-b52fbbf7.pth",
+      "url": "https://zenodo.org/api/records/3370489/files/other-b52fbbf7.pth/content",
+      "bytes": 35637796,
+      "sha256": "b52fbbf76479e752bd72e02304c602ac7802aa5bfbfb9cd12054b2695d5093ab",
+      "upstream_md5": "8637606623ed7c74986789c3b1f94bc6"
+    }
+  ]
+}

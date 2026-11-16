@@ -1,0 +1,13 @@
+{
+  "product": "Sculpt Clean 0.2.0",
+  "checked_at_utc": "2026-11-16T20:56:24.644377+00:00",
+  "platform": "Linux x86_64",
+  "juce_headers": "8.0.4",
+  "compiler_check": "c++ -std=c++17 -fsyntax-only -Wall -Wextra -Wpedantic -Werror -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_WEB_BROWSER=0 -DJUCE_USE_CURL=0 -Iqa/JUCE-8.0.4/modules -ISculptClean/ThirdParty/RNNoise/include SculptClean/Studio/Main.cpp",
+  "exit_code": 0,
+  "source_sha256": "817a83d4e853af6bf9756cea240c9ab8256313843526db2aa5ac71b2182ebf52",
+  "limitations": [
+    "Syntax and warning check only. No Linux GUI link or launch.",
+    "macOS native build, bundled self-test and DAW load remain pending GitHub Actions/device testing."
+  ]
+}

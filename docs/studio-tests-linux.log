@@ -1,0 +1,25 @@
+Studio test: voice
+PASS: explicit 48k requirement and exact 960-sample dry latency
+PASS: actual RNNoise frame output and deterministic reset; max error 7.45058e-09
+PASS: processed impulse peak at input+960 samples (480 upstream +480 packet assembly)
+Synthetic stationary noise change: -3.93689 dB; 4 s mono processing wall time 0.0875309 s (not a Mac/DAW measurement)
+PASS: finite recovery, zero instrumented C++/malloc/calloc/realloc processing allocations
+PASS: deterministic independent-channel stereo and bounded VAD
+Studio test: offline_repair
+declip_harmonic_error_improvement_db=13.4179 regions=220 restored_peak=0.837284 render_seconds_for_0.25s_mono=0.241861
+declip_modulated_error_improvement_db=21.2802
+repair_16_sample_gap_error_improvement_db=20.5253
+repair_64_sample_gap_error_improvement_db=16.2773
+repair_128_sample_gap_error_improvement_db=23.4888
+identity_unclipped_zero_amount_edge_limits_cancellation_validation=passed
+stereo_antiphase_max_error=0
+mid_render_transactional_cancel_and_short_transient_identity=passed
+Offline repair tests passed.
+Studio test: offline_tools
+resample_44k1_48k_roundtrip_error_db=-110.514 impulse_shift_samples=0 alias_30k_rejection_db=-95.5634
+zero_amount_and_core_latency_trim=exact
+spectral_rectangle_selected_1k_change_db=-17.9979 outside_6k_change_db=-4.25621e-07 outside_time=exact
+selection_feather_bounds_cancellation_validation=passed
+offline_learned_noise_change_db=-16.9605 rate_and_duration_validation=passed
+voice_mix_original_after_src_max_error=0
+Offline tools tests passed.

@@ -1,0 +1,87 @@
+{
+  "engine": "cathar 0.8.0",
+  "source_commit": "f2c2842f89084589d069e5a8a0b61311aa70d928",
+  "binary_sha256": "981f88398de1812f67a9b09e614d0fb00c9d57a791317a270259c06faf5e48a2",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "fixture_sample_rate_hz": 16000,
+  "fixture_duration_s": 3,
+  "scope": "Synthetic fixtures; not a real-recording listening comparison or RX parity claim",
+  "tests": [
+    {
+      "name": "adaptive de-hum: 50 Hz plus harmonic and wanted tone",
+      "passed": true,
+      "hum_change_db": -52.2663719513436,
+      "wanted_997hz_change_db": -0.000285668190643043,
+      "seconds": 0.20816785599890864
+    },
+    {
+      "name": "wind high-pass frequency discrimination",
+      "passed": true,
+      "30hz_change_db": -34.081934229929225,
+      "997hz_change_db": 1.2493267605448011e-06,
+      "seconds": 0.014354143000673503
+    },
+    {
+      "name": "autoregressive de-click against known clean waveform",
+      "passed": true,
+      "error_to_clean_change_db": -91.79070819036534,
+      "seconds": 0.01875680699959048
+    },
+    {
+      "name": "de-crackle against known clean waveform",
+      "passed": true,
+      "error_to_clean_change_db": -19.831274048764815,
+      "seconds": 0.012227849998453166
+    },
+    {
+      "name": "WPE: convolved sparse room and explicit tonal limitation",
+      "passed": true,
+      "late_tail_change_db": -2.6862533357053024,
+      "wanted_tone_change_db": -23.526470505084454,
+      "seconds": 0.18394085700128926
+    },
+    {
+      "name": "adaptive multiband de-ess",
+      "passed": true,
+      "6000hz_burst_change_db": -2.056633011146972,
+      "311hz_change_db": 1.0648051197897807e-06,
+      "seconds": 0.016285765999782598
+    },
+    {
+      "name": "EQ Match: identity and actual reference correction",
+      "passed": true,
+      "same_reference_error_db": -138.8828740817234,
+      "reference_high_low_ratio_db": 10.457574905606752,
+      "output_high_low_ratio_db": 10.457568190564201,
+      "seconds": 0.04328978600096889
+    },
+    {
+      "name": "stereo formats, additional CLI options, resampling and stats",
+      "passed": true,
+      "deplosive_seconds": 0.04272635300003458,
+      "derustle_seconds": 0.05274041899974691,
+      "normalize_seconds": 0.04967040300107328,
+      "normalized_lufs": -23.0,
+      "normalized_true_peak_dbtp": -20.3,
+      "dewow_seconds": 0.37596865100204013,
+      "stats_has_lufs_and_true_peak": true
+    }
+  ],
+  "limitations": [
+    {
+      "module": "WPE",
+      "wanted_sustained_440hz_change_db": -23.526470505084454,
+      "meaning": "A predictable wanted note can be removed; use conservative wet/dry and audition."
+    }
+  ],
+  "passed": true,
+  "upstream_unit_tests": {
+    "command": "cargo +1.90.0 test --manifest-path build-cathar/source/Cargo.toml --locked --release --package cathar --lib --jobs 2",
+    "passed": 128,
+    "failed": 0,
+    "ignored": 1,
+    "log": "cathar-upstream-unit-tests.log",
+    "platform": "Linux x86_64",
+    "optional_features_enabled": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "repository": "https://github.com/andryr/spade-declipping",
+  "commit": "d9285bc5d6874670c462773f4c0dba55c6d7f66b",
+  "files": [
+    {
+      "path": "LICENSE",
+      "git_blob_sha": "d3bfa7924b8e026cb50022a86343d03031f56d5d",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/LICENSE"
+    },
+    {
+      "path": "tight_aspade.m",
+      "git_blob_sha": "ae4fdf12c4b6e450cb29a1a369a16d33e0f35bb8",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/tight_aspade.m"
+    },
+    {
+      "path": "declip.m",
+      "git_blob_sha": "b19303ecb233f2a322e085cc6248fd67084bbcde",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/declip.m"
+    },
+    {
+      "path": "hard_thresh.m",
+      "git_blob_sha": "0e5b5ac805f6b5ba2eebdca1a8bf7b2e0f2aabe3",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/hard_thresh.m"
+    },
+    {
+      "path": "redundant_dft.m",
+      "git_blob_sha": "5d8e2804a8867c7f9ce70225a4b2d4187e434142",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/redundant_dft.m"
+    },
+    {
+      "path": "redundant_idft.m",
+      "git_blob_sha": "02cf8136719238b4e658df9206b9a3fadcb51ac2",
+      "url": "https://github.com/andryr/spade-declipping/blob/d9285bc5d6874670c462773f4c0dba55c6d7f66b/redundant_idft.m"
+    }
+  ]
+}

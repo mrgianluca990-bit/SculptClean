@@ -1,0 +1,42 @@
+{
+  "url": "https://zenodo.org/api/records/3370489",
+  "record_id": 3370489,
+  "title": "Open-Unmix-Pytorch UMX-HQ",
+  "creators": [
+    {
+      "name": "Fabian-Robert St\u00f6ter",
+      "affiliation": "inria",
+      "orcid": "0000-0002-2534-1165"
+    },
+    {
+      "name": "Antoine Liutkus",
+      "affiliation": "inria"
+    }
+  ],
+  "license": {
+    "id": "mit-license"
+  },
+  "doi": "10.5281/zenodo.3370489",
+  "files": [
+    {
+      "key": "bass-8d85a5bd.pth",
+      "checksum": "md5:8cc37d31903fe48306468ee968f4b1b6",
+      "size": 35637796
+    },
+    {
+      "key": "drums-9619578f.pth",
+      "checksum": "md5:cebf76e196e73e85d247f462c31e36fc",
+      "size": 35637796
+    },
+    {
+      "key": "vocals-b62c91ce.pth",
+      "checksum": "md5:d918985fad0fedf6d9ce89e279aa7218",
+      "size": 35637796
+    },
+    {
+      "key": "other-b52fbbf7.pth",
+      "checksum": "md5:8637606623ed7c74986789c3b1f94bc6",
+      "size": 35637796
+    }
+  ]
+}
