@@ -27,7 +27,7 @@ private:
     SculptCleanLookAndFeel look;
     std::array<juce::Slider, 4> amounts;
     juce::Slider output, sourceThreshold, sourceDepth;
-    juce::TextButton learn { "Apprendi rumore · 2 s" }, bypass { "BYPASS" };
+    juce::TextButton learn { juce::String::fromUTF8 ("Apprendi rumore · 2 s") }, bypass { "BYPASS" };
     juce::TextButton sourceEnabled { "SOURCE OFF" }, listenRemoved { "ASCOLTA RIMOSSO" };
     juce::ComboBox humFrequency;
     std::array<std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>, 4> amountAttachments;

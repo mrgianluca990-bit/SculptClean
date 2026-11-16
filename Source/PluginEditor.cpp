@@ -124,10 +124,10 @@ SculptCleanEditor::SculptCleanEditor (SculptCleanProcessor& p)
     }
     sourceThreshold.setTextValueSuffix (" dBFS");
     sourceThreshold.setDoubleClickReturnValue (true, -32.0);
-    sourceThreshold.setTooltip ("Soglia del Source Extractor. Alzala finché i rientri scendono nelle pause. Doppio clic: -32 dBFS.");
+    sourceThreshold.setTooltip (juce::String::fromUTF8 ("Soglia del Source Extractor. Alzala finché i rientri scendono nelle pause. Doppio clic: -32 dBFS."));
     sourceDepth.setTextValueSuffix (" %");
     sourceDepth.setDoubleClickReturnValue (true, 50.0);
-    sourceDepth.setTooltip ("Massima attenuazione nelle pause: 0–48 dB. 50% = 24 dB. Doppio clic: 50%.");
+    sourceDepth.setTooltip (juce::String::fromUTF8 ("Massima attenuazione nelle pause: 0–48 dB. 50% = 24 dB. Doppio clic: 50%."));
     sourceEnabled.setClickingTogglesState (true);
     sourceEnabled.setTooltip ("Expander derivato da Sculpt Strip: riduce i rientri sotto soglia, con stereo collegato. DSP classico, senza separazione vocale AI.");
     sourceEnabled.setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xff514167));
@@ -138,7 +138,7 @@ SculptCleanEditor::SculptCleanEditor (SculptCleanProcessor& p)
     listenRemoved.setClickingTogglesState (true);
     listenRemoved.setColour (juce::TextButton::buttonOnColourId, amber);
     listenRemoved.setColour (juce::TextButton::textColourOnId, juce::Colour (0xff191919));
-    listenRemoved.setTooltip ("Ascolta ciò che viene rimosso. Se senti troppo segnale utile, riduci l'intervento. Bypass ha la precedenza.");
+    listenRemoved.setTooltip (juce::String::fromUTF8 ("Ascolta ciò che viene rimosso. Se senti troppo segnale utile, riduci l'intervento. Bypass ha la precedenza."));
     learn.setTooltip ("Premi durante 2 secondi di solo rumore, senza voce o musica. Avvia la riproduzione nella DAW per completare l'apprendimento.");
     learn.onClick = [this] { processor.requestNoiseLearn(); };
     for (auto* button : { &learn, &bypass, &sourceEnabled, &listenRemoved }) addAndMakeVisible (*button);
@@ -183,7 +183,7 @@ void SculptCleanEditor::timerCallback()
     outputLevel = std::max (processor.display.outputPeak.load (std::memory_order_relaxed), outputLevel * 0.83f);
     const bool learning = processor.display.noiseLearning.load (std::memory_order_relaxed);
     learn.setEnabled (! learning);
-    learn.setButtonText (learning ? "Apprendimento…" : "Apprendi rumore · 2 s");
+    learn.setButtonText (juce::String::fromUTF8 (learning ? "Apprendimento…" : "Apprendi rumore · 2 s"));
     sourceEnabled.setButtonText (sourceEnabled.getToggleState() ? "SOURCE ON" : "SOURCE OFF");
     repaint();
 }
@@ -201,7 +201,7 @@ void SculptCleanEditor::drawMeter (juce::Graphics& graphics, juce::Rectangle<flo
     graphics.setColour (db > 0.0f ? warm : cool);
     graphics.fillRoundedRectangle (bounds.withWidth (bounds.getWidth() * position), 3.0f);
     graphics.setColour (cream.withAlpha (0.75f));
-    graphics.drawText (db <= -60.0f ? "< −60 dB" : juce::String (db, 1) + " dB",
+    graphics.drawText (db <= -60.0f ? juce::String::fromUTF8 ("< −60 dB") : juce::String (db, 1) + " dB",
                        bounds.withX (744.0f).withWidth (67.0f).expanded (0.0f, 4.0f), juce::Justification::centredRight);
 }
 
@@ -213,7 +213,7 @@ void SculptCleanEditor::paint (juce::Graphics& graphics)
     graphics.drawText ("S C U L P T   C L E A N", 240, 9, 480, 28, juce::Justification::centred);
     graphics.setColour (cream.withAlpha (0.45f));
     graphics.setFont (juce::Font (juce::FontOptions (10.0f)));
-    graphics.drawText ("STUDIO   ·   0.2.0", 340, 38, 280, 18, juce::Justification::centred);
+    graphics.drawText (juce::String::fromUTF8 ("STUDIO   ·   0.2.0"), 340, 38, 280, 18, juce::Justification::centred);
 
     const std::array<const char*, 4> labels { "DENOISE", "DEREVERB", "DE-CLICK", "DE-HUM" };
     for (std::size_t i = 0; i < labels.size(); ++i)
