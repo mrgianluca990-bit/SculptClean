@@ -1,0 +1,91 @@
+name: Build macOS Studio and VST3
+
+"on":
+  workflow_dispatch:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sculpt-clean-macos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Universal macOS Studio and VST3
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      SCULPT_CATHAR_RUST_TOOLCHAIN: "1.90.0"
+      SCULPT_CATHAR_BUILD_JOBS: "2"
+      SCULPT_CLEAN_BUILD_JOBS: "3"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify VST3 DSP engine
+        run: |
+          set -o pipefail
+          mkdir -p docs
+          bash tools/test-core.sh 2>&1 | tee docs/core-tests-macos.log
+
+      - name: Verify RNNoise and offline restoration tools
+        run: |
+          set -o pipefail
+          mkdir -p docs
+          bash tools/test-studio.sh 2>&1 | tee docs/studio-tests-macos.log
+
+      - name: Measure DSP cost on the macOS runner
+        run: bash tools/run-benchmark.sh docs/cpu-macos-benchmark.json
+
+      - name: Install pinned Rust and both macOS targets
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal --no-self-update \
+            --target aarch64-apple-darwin --target x86_64-apple-darwin
+          cargo +1.90.0 --version
+          rustc +1.90.0 --version
+
+      - name: Cache pinned Cathar dependencies and compiled objects
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            build-macos/cathar-build
+          key: ${{ runner.os }}-${{ runner.arch }}-cathar-rust1.90.0-${{ hashFiles('ThirdParty/Cathar/provenance.json', 'tools/build-cathar.sh') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-cathar-rust1.90.0-
+
+      - name: Build, test native app and helper, sign and package
+        run: |
+          set -o pipefail
+          bash tools/build-macos.sh 2>&1 | tee docs/build-macos.log
+
+      - name: Upload Studio and VST3 archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sculpt-Clean-macOS
+          path: |
+            dist/Sculpt-Clean-macOS.zip
+            dist/Sculpt-Clean-macOS.zip.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload native validation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sculpt-Clean-verifiche
+          path: |
+            docs/cpu-macos-benchmark.json
+            docs/core-tests-macos.log
+            docs/studio-tests-macos.log
+            docs/plugin-state-macos.log
+            docs/cathar-macos-verification.json
+            docs/studio-macos-smoke.log
+            docs/studio-macos-smoke.png
+            docs/build-macos.log
+          if-no-files-found: warn
+          retention-days: 14
